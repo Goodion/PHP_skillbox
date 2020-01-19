@@ -4,12 +4,12 @@ namespace src\App;
 
 class Controller
 {
-    public static function classIndex()
+    public static function index()
     {
         return 'home';
     }
 
-    public static function classAbout()
+    public static function about()
     {
         return 'about';
     }
