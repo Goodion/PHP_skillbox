@@ -2,30 +2,32 @@
 
 namespace homework2_4\farm_2_0;
 
-class Animal
+abstract class Animal
 {
-    protected $name;
-    protected $voice;
-    protected $steps = 'топ-топ';
+    abstract public function say();
+    abstract public function walk();
+}
+
+abstract class Bird extends Animal
+{
+    public $animalType = 'птица';
+
+    abstract public function setSteps($steps);
+    abstract public function walk();
+    abstract public function tryToFly();
+}
+
+class Chicken extends Bird
+{
+    public $animalType = 'птица';
+    public $voice = 'ко-ко';
+    public $name = 'Курица';
 
     public function say()
     {
-        return $this->voice;
-    }
-
-    public function walk()
-    {
-        return $this->steps;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function setVoice($voice)
-    {
-        $this->voice = $voice;
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
     }
 
     public function setSteps($steps)
@@ -33,20 +35,12 @@ class Animal
         $this->steps = $steps;
     }
 
-    public function setAnimalType($animalType)
-    {
-        $this->animalType = $animalType;
-    }
-}
-
-class Bird extends Animal
-{
-    public $animalType = 'птица';
-
     public function walk()
     {
         $this->setSteps('пытается полететь - вжих-вжих-топ-топ');
-        return $this->tryToFly();
+        echo('<br />');
+        echo($this->name . ' ' . $this->tryToFly());
+        echo('<br />');
     }
 
     public function tryToFly()
@@ -55,45 +49,136 @@ class Bird extends Animal
     }
 }
 
-class Chicken extends Bird
-{
-    public $voice = 'ко-ко';
-    public $name = 'Курица';
-}
-
 class Goose extends Bird
 {
+    public $animalType = 'птица';
     public $voice = 'кря-кря';
     public $name = 'Гусь';
+
+    public function say()
+    {   
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function setSteps($steps)
+    {
+        $this->steps = $steps;
+    }
+
+    public function walk()
+    {
+        $this->setSteps('пытается полететь - вжих-вжих-топ-топ');
+        echo('<br />');
+        echo($this->name . ' ' . $this->tryToFly());
+        echo('<br />');
+    }
+
+    public function tryToFly()
+    {
+        return $this->steps;
+    }
 }
 
 class Turkey extends Bird
 {
+    public $animalType = 'птица';
     public $voice = 'кулдык-кулдык';
     public $name = 'Индюк';
+
+    public function say()
+    {   
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function setSteps($steps)
+    {
+        $this->steps = $steps;
+    }
+
+    public function walk()
+    {
+        $this->setSteps('пытается полететь - вжих-вжих-топ-топ');
+        echo('<br />');
+        echo($this->name . ' ' . $this->tryToFly());
+        echo('<br />');
+    }
+
+    public function tryToFly()
+    {
+        return $this->steps;
+    }
 }
 
-class Hoofed extends Animal
+abstract class Hoofed extends Animal
 {
     public $animalType = 'копытное';
 }
 
 class Cow extends Hoofed
 {
+    public $steps = 'топ-топ';
     public $voice = 'му-му';
     public $name = 'Коровка';
+
+    public function say()
+    {   
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function walk()
+    {
+        echo('<br />');
+        echo($this->name . ' идёт - ' . $this->steps);
+        echo('<br />');
+    }
 }
 
 class Pig extends Hoofed
 {
+    public $steps = 'топ-топ';
     public $voice = 'хрю-хрю';
     public $name = 'Хрюшка';
+
+    public function say()
+    {
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function walk()
+    {
+        echo('<br />');
+        echo($this->name . ' идёт - ' . $this->steps);
+        echo('<br />');
+    }
 }
 
 class Horse extends Hoofed
 {
+    public $steps = 'топ-топ';
     public $voice = 'иго-го';
     public $name = 'Лошадь';
+
+    public function say()
+    {
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function walk()
+    {
+        echo('<br />');
+        echo($this->name . ' идёт - ' . $this->steps);
+        echo('<br />');
+    }
 }
 
 class Farm
@@ -108,7 +193,7 @@ class Farm
     
     public function addAnimal(Animal $animal)
     {
-        echo($animal->name . ' говорит ' . $animal->say() . ' и, затем, ' . $animal->walk() . ' на ферму ' . $this->getFarmType() . ' <br />');
+        $animal->walk();
         $this->animals[] = $animal;
     }
 
@@ -120,7 +205,7 @@ class Farm
 
         for ($i = 0; $i < $count; $i++) {
             $this->randomizerCheckUnique($result, $count);
-            echo($this->animals[$result[$i]]->name . ' с фермы ' . $this->getFarmType() . ' кричит ' . $this->animals[$result[$i]]->say() . '<br />');
+            $this->animals[$result[$i]]->say();
         } 
     }
 
@@ -157,14 +242,16 @@ class BirdFarm extends Farm
 
     public function addAnimal(Animal $animal)
     {
-        echo($animal->name . ' говорит ' . $animal->say() . ' и, затем, ' . $animal->walk() . ' на ферму ' . $this->getFarmType() . ' <br />');
+        $animal->walk();
         $this->animals[] = $animal;
-        echo('На ферме ' . $this->getFarmType() . ' сейчас находится птиц - ' . $this->showAnimalsCount() . '.<br />');
+        $this->showAnimalsCount();
     }
 
     function showAnimalsCount()
     {
-        return count($this->animals);
+        echo('<br />');
+        echo('На ферме ' . $this->getFarmType() . ' сейчас находится птиц - ' . count($this->animals) . '.<br />');
+        echo('<br />');
     }
 }
 

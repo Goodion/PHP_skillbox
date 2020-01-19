@@ -2,54 +2,73 @@
 
 namespace homework2_4\farm;
 
-class Animal
+abstract class Animal
 {
-    protected $name;
-    protected $voice;
-    protected $steps = 'топ-топ';
-
-    public function say()
-    {
-        return $this->voice;
-    }
-
-    public function walk()
-    {
-        return $this->steps;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function setVoice($voice)
-    {
-        $this->voice = $voice;
-    }
-
-    public function setSteps($steps)
-    {
-        $this->steps = $steps;
-    }
+    abstract public function say();
+    abstract public function walk();
 }
 
 class Cow extends Animal
 {
+    public $steps = 'топ-топ';
     public $voice = 'му-му';
     public $name = 'Коровка';
+
+    public function say()
+    {   
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function walk()
+    {
+        echo('<br />');
+        echo($this->name . ' идёт - ' . $this->steps);
+        echo('<br />');
+    }
 }
 
 class Pig extends Animal
 {
+    public $steps = 'топ-топ';
     public $voice = 'хрю-хрю';
     public $name = 'Хрюшка';
+
+    public function say()
+    {
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function walk()
+    {
+        echo('<br />');
+        echo($this->name . ' идёт - ' . $this->steps);
+        echo('<br />');
+    }
 }
 
 class Chicken extends Animal
 {
+    public $steps = 'топ-топ';
     public $voice = 'ко-ко';
     public $name = 'Курица';
+
+    public function say()
+    {
+        echo('<br />');
+        echo($this->name . ' говорит ' . $this->voice);
+        echo('<br />');
+    }
+
+    public function walk()
+    {
+        echo('<br />');
+        echo($this->name . ' идёт - ' . $this->steps);
+        echo('<br />');
+    }
 }
 
 class Farm
@@ -63,7 +82,7 @@ class Farm
     
     public function addAnimal(Animal $animal)
     {
-        echo($animal->name . ' говорит ' . $animal->say() . ' и, затем, ' . $animal->walk() . ' на ферму <br />');
+        $animal->walk();
         $this->animals[] = $animal;
     }
 
@@ -86,7 +105,7 @@ class Farm
 
         for ($i = 0; $i < $count; $i++) {
             randomizerCheckUnique($result, $count);
-            echo($this->animals[$result[$i]]->name . ' с фермы кричит ' . $this->animals[$result[$i]]->say() . '<br />');
+            $this->animals[$result[$i]]->say();
         } 
     }
 }
