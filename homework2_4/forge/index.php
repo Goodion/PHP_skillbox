@@ -1,15 +1,25 @@
 <?php
 
-class Forge
+interface Renderable
 {
-    public function burn($object)
+    public function render($name);
+}
+
+interface CanBurn
+{
+    public function burn();
+}
+
+class Forge 
+{
+    public function burn(CanBurn $object)
     {
         $flame = $object->burn();
         echo $flame->render((string)$object) . PHP_EOL;
     }
 }
 
-class BlueFlame
+class BlueFlame implements Renderable
 {
     public function render($name)
     {
@@ -17,7 +27,7 @@ class BlueFlame
     }
 }
 
-class RedFlame
+class RedFlame implements Renderable
 {
     public function render($name)
     {
@@ -25,7 +35,7 @@ class RedFlame
     }
 }
 
-class Smoke
+class Smoke implements Renderable
 {
     public function render($name)
     {
@@ -33,7 +43,7 @@ class Smoke
     }
 }
 
-class AllThat
+class AllThat implements CanBurn
 {
     public $name;
     
@@ -53,7 +63,7 @@ class AllThat
     }
 }
 
-class Brain
+class Brain implements CanBurn
 {
     public $name;
     
@@ -73,7 +83,7 @@ class Brain
     }
 }
 
-class Bonfire
+class Bonfire implements CanBurn
 {
     public $name;
     
@@ -93,7 +103,7 @@ class Bonfire
     }
 }
 
-class Seat
+class Seat implements CanBurn
 {
     public $name;
     
@@ -113,7 +123,7 @@ class Seat
     }
 }
 
-class Meat
+class Meat implements CanBurn
 {
     public $name;
     

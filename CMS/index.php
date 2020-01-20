@@ -16,8 +16,8 @@ $router->get('/about', function() {
     return 'about';
 });
 
-$router->get('/',  \src\App\Controller::class . '::index');
-$router->get('/about', \src\App\Controller::class . '::about');
+$router->get('/', \src\App\Controller::class . '@index');
+$router->get('/about', \src\App\Controller::class . '@about');
 
 $router->get('/test', function() {
     return new view\View('index', ['title' => 'Index Page']);

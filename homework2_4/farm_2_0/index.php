@@ -13,7 +13,6 @@ abstract class Bird extends Animal
     public $animalType = 'птица';
 
     abstract public function setSteps($steps);
-    abstract public function walk();
     abstract public function tryToFly();
 }
 

@@ -6,20 +6,33 @@ class Router
 {
     public static $registeredPages;
 
+    private static function getClassMethod($inputSting) 
+    {
+        $classMethod = str_replace('@', '::', $inputSting);
+        return $classMethod;
+    }
+
     public function get($path, $callback)
     {
-        self::$registeredPages[$path] = $callback();
+        self::$registeredPages[$path] = $callback;
     }
 
     public static function dispatch()
     {
-        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        if (array_key_exists($url, self::$registeredPages)) {
-            if (self::$registeredPages[$url] instanceof Renderable) {
-                self::$registeredPages[$url]->render();
+        if (array_key_exists($path, self::$registeredPages)) {
+                        
+            $callback = self::$registeredPages[$path];
+            
+            if (is_string($callback) && strpos($callback, '@')) {
+                $callback = self::getClassMethod($callback);
+            }
+
+            if ($callback() instanceof Renderable) {
+                $callback()->render();
             } else {
-                return self::$registeredPages[$url];
+                return $callback();
             }
         } else {
             return 'ERROR 404';
