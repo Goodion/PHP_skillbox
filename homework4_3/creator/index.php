@@ -49,7 +49,7 @@ class Box extends Item{};
 class Robot extends Item{};
 
 $creator = new Creator;
-$arr = ['Book', 'asdqv', 'Nose', 'Cat', 'Idwqsw', 'dsqq', 'Rasdf', 'House', 'Dqweq', 'Pen', 'Robot'];
+$arr = ['Book', 'asdqv', 'Nose', 'Cat', 'Idwqsw', 'dsqq', 'Rasdf', 'House', 'Dqweq', 'Pen', 'Robot', 'Table'];
 
 foreach ($arr as $item) {
     $newObj = $creator::create($item);

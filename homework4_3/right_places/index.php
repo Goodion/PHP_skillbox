@@ -39,3 +39,4 @@ $manager->place(new Saw);
 $manager->place(new Screwdriver);
 
 $manager->place('объект');
+$manager->place('');
