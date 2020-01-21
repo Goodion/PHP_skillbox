@@ -281,6 +281,7 @@ $farmer->addAnimal($birdFarm, new Turkey());
 $farmer->addAnimal($hoofedFarm, new Horse());
 $farmer->addAnimal($hoofedFarm, new Horse());
 $farmer->addAnimal($birdFarm, new Goose());
+$farmer->addAnimal($birdFarm, new Goose());
 
 $farmer->rollCall($hoofedFarm);
 $farmer->rollCall($birdFarm);
