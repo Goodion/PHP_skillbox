@@ -148,6 +148,7 @@ $brain = new Brain('Мозг');
 $bonfire = new Bonfire('Костёр');
 $seat = new Seat('Сиденье');
 $meat = new Meat('Стейк');
+$meat = new Meat('Котлета');
 
 $forge = new Forge();
 
