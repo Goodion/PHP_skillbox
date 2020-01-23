@@ -29,13 +29,13 @@ class Router
                 $callback = self::getClassMethod($callback);
             }
 
-            if ($callback() instanceof Renderable) {
+            if ($callback() instanceof \src\App\Renderable) {
                 $callback()->render();
             } else {
                 return $callback();
             }
         } else {
-            return 'ERROR 404';
+            throw new \src\App\Exception\NotFoundException('Путь ' . $path . ' не найден на сервере.', 404);
         }
     }
 }

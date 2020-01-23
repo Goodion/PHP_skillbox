@@ -14,7 +14,7 @@ class View implements \src\App\Renderable
     public function render()
     {
         echo('<pre>');
-        echo($this->title);
+        echo($this->title. PHP_EOL);
         echo('</pre>');
         include $this->file;
     }

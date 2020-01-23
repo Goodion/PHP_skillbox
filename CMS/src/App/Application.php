@@ -6,6 +6,10 @@ class Application
 {
     public function run()
     {
-        echo(\src\App\Router::dispatch());
+        try {
+            echo(\src\App\Router::dispatch());
+        } catch (\Exception $e) {
+            \src\App\Exception\NotFoundException::renderException($e);
+        }
     }
 }
