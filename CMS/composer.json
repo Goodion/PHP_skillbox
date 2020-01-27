@@ -1,0 +1,17 @@
+{
+    "name": "goodion/cms",
+    "description": "cms",
+    "authors": [
+        {
+            "name": "Ivan Saltykov",
+            "email": "hcys@list.ru"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^6.12"
+    },
+
+    "autoload": {
+        "psr-4": {"src\\": "src/"}
+    }
+}

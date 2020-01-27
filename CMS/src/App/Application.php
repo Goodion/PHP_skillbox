@@ -1,9 +1,19 @@
 <?php
 
 namespace src\App;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Application
 {
+    public function initialize()
+    {
+        $capsule = new Capsule;
+        $config = Config::getInstance();
+        $capsule->addconnection($config->get('db'));
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
+    }
+
     public function run()
     {
         try {
