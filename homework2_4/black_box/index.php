@@ -11,7 +11,7 @@ class BlackBox
 
     public function getDataByEngineer(Engineer $engineer)
     {
-        $engineer->data = $this->data; 
+        return $this->data;
     }
 }
 
@@ -74,6 +74,8 @@ class Plane
 
 class Engineer
 {
+    public $blackBox;
+    
     public function setBox(BlackBox $blackBox)
     {
         $this->blackBox = $blackBox;
@@ -82,13 +84,12 @@ class Engineer
     public function takeBox(Plane $plane)
     {
         $plane->getBoxForEngineer($this);
-        $this->blackBox->getDataByEngineer($this);
     }
 
     public function decodeBox()
     {
         echo('<pre>');
-        print_r($this->data);
+        print_r($this->blackBox->getDataByEngineer($this));
         echo('</pre>');
     }
 }
