@@ -26,6 +26,15 @@ $router->get('/', function() {
 $router->get('/about', function() {
     return new view\View('about', ['title' => 'about Page']);
 });
+
+$router->get(
+    '/post', 
+    function() {
+        return new view\View('post', ['title' => 'POST PAGE']);
+    }, 
+    'POST'
+);
+
 $router->get('/new', function() {
     print_r(\src\Model\Book::all());
     return new view\View('new.new', ['title' => 'NEW Page']);

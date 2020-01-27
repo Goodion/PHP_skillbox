@@ -2,4 +2,6 @@
 
 namespace src\App\Exception;
 
-class HttpException extends \Exception {};
+class HttpException extends \Exception
+{
+}

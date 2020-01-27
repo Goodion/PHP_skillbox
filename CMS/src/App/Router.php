@@ -1,41 +1,38 @@
 <?php
 
 namespace src\App;
+use \src\App\Exception as Exception,
+\src\App\Renderable as Renderable,
+\src\App\Route as Route;
 
 class Router
 {
-    public static $registeredPages;
+    private $registeredPages;
 
-    private static function getClassMethod($inputSting) 
+    public function get($path, $callback, $method = 'GET')
     {
-        $classMethod = str_replace('@', '::', $inputSting);
-        return $classMethod;
+        $path = '/' . trim($path, '/');
+        $this->registeredPages[$path] = new Route($path, $callback, $method);
     }
 
-    public function get($path, $callback)
-    {
-        self::$registeredPages[$path] = $callback;
-    }
-
-    public static function dispatch()
+    public function dispatch()
     {
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $method = $_SERVER['REQUEST_METHOD'];
         
-        if (array_key_exists($path, self::$registeredPages)) {
-                        
-            $callback = self::$registeredPages[$path];
-            
-            if (is_string($callback) && strpos($callback, '@')) {
-                $callback = self::getClassMethod($callback);
-            }
-
-            if ($callback() instanceof \src\App\Renderable) {
-                $callback()->render();
+        if (array_key_exists($path, $this->registeredPages)) {
+            if ($this->registeredPages[$path]->match($method, $path)) {
+                if ($this->registeredPages[$path]->run($path) instanceof Renderable) {
+                    $this->registeredPages[$path]->run($path)->render();
+                } else {
+                    return $this->registeredPages[$path]->run($path);
+                }
             } else {
-                return $callback();
+                throw new Exception\HttpException('Метод передачи ' . $method . ' не сооветствует маршруту.', 405);
             }
+                
         } else {
-            throw new \src\App\Exception\NotFoundException('Путь ' . $path . ' не найден на сервере.', 404);
+            throw new Exception\NotFoundException('Путь ' . $path . ' не найден на сервере.', 404);
         }
     }
 }

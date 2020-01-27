@@ -14,9 +14,5 @@ function array_get($array, $key, $default = null)
         }
     }
 
-    /* if (is_array($path)) {
-        $path = $default;
-    } */
-
     return $path;
 }
