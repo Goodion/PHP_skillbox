@@ -4,20 +4,14 @@ class Manager
 {
     public function place($item)
     {
-        $class = get_parent_class($item);
-
-        switch ($class) {
-            case 'Papers':
-                echo 'Положил ' . $class . ' на стол' . PHP_EOL;
-                break;
-            
-            case 'Instrument':
-                echo 'Убрал ' . $class . ' внутрь стола' . PHP_EOL;
-                break;
-
-            default:
-                echo 'Выкинул ' . $item . ' в корзину' . PHP_EOL;
-
+        if ($item instanceof Papers) {
+            echo 'Положил ' . get_class($item) . ' на стол' . PHP_EOL;
+        } else if ($item instanceof Instrument) {
+            echo 'Убрал ' . get_class($item) . ' внутрь стола' . PHP_EOL;
+        } else if (is_object($item)) {
+            echo 'Выкинул ' . get_class($item) . ' в корзину' . PHP_EOL;
+        } else {
+            echo 'Выкинул ' . $item . ' в корзину' . PHP_EOL;
         }
     }
 }

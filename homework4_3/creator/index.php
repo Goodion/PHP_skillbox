@@ -2,6 +2,8 @@
 
 abstract class Item
 {
+    public $name;
+    
     public function __construct($name)
     {
         $this->name = $name;
@@ -29,8 +31,7 @@ class Creator
 {
     public static function create($name)
     {
-        $classes = get_declared_classes();
-        if (in_array($name, $classes)) {
+        if (class_exists($name)) {
             return new $name($name);
         } else {
             return new EmptyItem($name);

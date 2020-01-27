@@ -15,9 +15,11 @@ class Display
     public static function show($formatter, $string)
     {
         if ($formatter instanceof Renderable) {
-            echo($formatter->render($string));
+            $formatter->render($string);
         } else if ($formatter instanceof Formatter || method_exists($formatter, 'format')) {
-            echo($formatter->format($string));
+            $formatter->format($string);
+        } else {
+            echo($string);
         }
     }
 }
