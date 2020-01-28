@@ -16,7 +16,7 @@ class View implements \src\App\Renderable
     public function render()
     {
         include $this->header;
-        echo('<div class="h1">' . $this->title . '</div>' . PHP_EOL);
+        echo '<div class="h1">' . $this->title . '</div>' . PHP_EOL;
         include $this->file;
         include $this->footer;
     }

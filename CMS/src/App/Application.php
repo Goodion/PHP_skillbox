@@ -1,9 +1,7 @@
 <?php
 
 namespace src\App;
-use Illuminate\Database\Capsule\Manager as Capsule,
-\src\App\Router as Router,
-\src\App\Exception as Exception;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Application
 {
@@ -31,14 +29,14 @@ class Application
             } else {
                 $errorCode = 500;
             }
-            echo('Возникла ошибка: ' . $e->getMessage() . ' Код ошибки - ' . $errorCode);
+            echo 'Возникла ошибка: ' . $e->getMessage() . ' Код ошибки - ' . $errorCode;
         }
     }
 
     public function run()
     {
         try {
-            echo($this->router->dispatch());
+            echo $this->router->dispatch();
         } catch (\Exception $e) {
             $this->renderException($e);
         }

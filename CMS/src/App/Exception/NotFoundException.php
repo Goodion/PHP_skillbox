@@ -7,8 +7,8 @@ class NotFoundException extends \src\App\Exception\HttpException implements \src
 {
     public function render()
     {
-        echo('<pre>');
-        echo('Возникла ошибка: ' . $this->getMessage() . ' Код ошибки - ' . $this->getCode());
-        echo('</pre>');
+        echo '<pre>';
+        echo 'Возникла ошибка: ' . $this->getMessage() . ' Код ошибки - ' . $this->getCode();
+        echo '</pre>';
     }
 }

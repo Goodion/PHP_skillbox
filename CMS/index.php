@@ -1,5 +1,9 @@
 <?php
 
+use \src\App\Controller as Controller,
+    view\View as View,
+    \src\App\Application as Application;
+
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
@@ -8,7 +12,7 @@ require_once APP_DIR . '/view/View.php';
 
 $router = new \src\App\Router();
 
-/* $router->get('/', function() {
+$router->get('/', function() {
     return 'home';
 });
 
@@ -16,35 +20,35 @@ $router->get('/about', function() {
     return 'about';
 }); 
 
-$router->get('/', \src\App\Controller::class . '@index');
-$router->get('/about', \src\App\Controller::class . '@about'); */
+$router->get('/', Controller::class . '@index');
+$router->get('/about', Controller::class . '@about');
 
 $router->get('/', function() {
-    return new view\View('index', ['title' => 'index Page']);
+    return new View('index', ['title' => 'index Page']);
 });
 
 $router->get('/about', function() {
-    return new view\View('about', ['title' => 'about Page']);
+    return new View('about', ['title' => 'about Page']);
 });
 
-$router->get(
-    '/post', 
-    function() {
-        return new view\View('post', ['title' => 'POST PAGE']);
-    }, 
-    'POST'
-);
+$router->post('/post', function() {
+    return new View('post', ['title' => 'POST PAGE']);
+});
 
 $router->get('/new', function() {
     print_r(\src\Model\Book::all());
-    return new view\View('new.new', ['title' => 'NEW Page']);
+    return new View('new.new', ['title' => 'NEW Page']);
 });
 
 $router->get('/test', function() {
-    return new view\View('new.test', ['title' => 'TEST PAGE']);
+    return new View('new.test', ['title' => 'TEST PAGE']);
 });
 
-$application = new \src\App\Application($router);
+$router->get( '/test/*/test2/*', function ($param1, $param2) {
+    return "Test page with param1=$param1 param2=$param2" ;
+});
+
+$application = new Application($router);
 
 $application->initialize();
 $application->run();
