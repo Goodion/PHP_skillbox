@@ -17,18 +17,18 @@ class Validator
     } 
 }
 
-class UserFormValidation{
-    
+class UserFormValidation
+{
     public function validate($post)
     {
         if ($post['name'] === '') {
-            throw new \Exception('имя должно быть не пустым', 300);
+            throw new \Exception('имя должно быть не пустым');
         } else if ($post['age'] === '' || $post['age'] < 18) {
-            throw new \Exception('возраст должен быть не менее 18 лет', 300);
+            throw new \Exception('возраст должен быть не менее 18 лет');
         } else if (! Validator::emailValidate($post['email'])) {
-            throw new \Exception('Емейл пользователя указан неверно', 300);
+            throw new \Exception('Емейл пользователя указан неверно');
         } else {
-            return 'Форма успешно отправлена';
+            return true;
         }
     }
 }
@@ -36,9 +36,9 @@ class UserFormValidation{
 if (! empty($_POST)) {
     try {
         $success = (new UserFormValidation())->validate($_POST);
-        echo($success);
+        echo 'Форма успешно отправлена';
     } catch (\Exception $e) {
         $error = $e->getMessage();
-        echo($error);
+        echo $error;
     }
 }

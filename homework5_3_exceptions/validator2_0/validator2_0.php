@@ -11,7 +11,7 @@ class User
     public function load($id)
     {
         if (! in_array($id, $this->ids)) {
-            throw new \Exception('Пользователь не найден в базе данных', 300);
+            throw new \Exception('Пользователь не найден в базе данных');
         } else {
             return true;
         }
@@ -21,14 +21,12 @@ class User
     {
         if (mt_rand(0, 10) < 5) {
             $this->users[] = $data;
-            return 'Пользователь успешно добавлен в БД';
+            return true;
         } else {
-            throw new \Exception('Ошибка записи данных пользователя в БД', 300);
+            throw new \Exception('Ошибка записи данных пользователя в БД');
         }
-        
     }
 }
-
 
 class Validator
 {
@@ -39,26 +37,26 @@ class Validator
             return false;
         } else if (! strripos($email, '@')) {
             return false;
-        } else if  (! strripos($email, '.') || strripos($email, '.') < strripos($email, '@')) {
+        } else if (! strripos($email, '.') || strripos($email, '.') < strripos($email, '@')) {
             return false;
         } else {
             return true;
         }
-    } 
+    }
 }
 
-class UserFormValidation{
-    
+class UserFormValidation
+{
     public function validate($post)
     {
         if ($post['name'] === '') {
-            throw new \Exception('имя должно быть не пустым', 300);
+            throw new \Exception('имя должно быть не пустым');
         } else if ($post['age'] === '' || $post['age'] < 18) {
-            throw new \Exception('возраст должен быть не менее 18 лет', 300);
+            throw new \Exception('возраст должен быть не менее 18 лет');
         } else if (! Validator::emailValidate($post['email'])) {
-            throw new \Exception('Емейл пользователя указан неверно', 300);
+            throw new \Exception('Емейл пользователя указан неверно');
         } else {
-            return 'Форма успешно отправлена';
+            return true;
         }
     }
 }
@@ -69,9 +67,9 @@ if (! empty($_POST)) {
         $user->load($_POST['id']);
         (new UserFormValidation())->validate($_POST);
         $success = $user->save($_POST);
-        echo($success);
+        echo 'Пользователь успешно добавлен в БД';
     } catch (\Exception $e) {
         $error = $e->getMessage();
-        echo($error);
+        echo $error;
     }
 }
