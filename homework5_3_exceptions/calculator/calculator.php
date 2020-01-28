@@ -52,18 +52,19 @@ $callbacks = [
 
     [$multiplier, 'multiply'],
 
-    'divide', 
+    'homework5_3_exceptions\calculator\divide', 
 
 ];
 
-echo('<pre>');
+echo '<pre>';
 foreach ($numbers as $pair) {
 
-    echo ('Число 1: <b>' . $pair[0] . '</b>; Число 2: <b>' . $pair[1] . '</b>' . PHP_EOL);
+    $format = 'Число 1: <b>%d</b>; Число 2: <b>%d</b>' . PHP_EOL;
+    echo sprintf($format, $pair[0], $pair[1]);
    
     foreach ($callbacks as $callback) {
         $result = Calculator::calculate($pair[0], $pair[1], $callback);
-        echo ($result . PHP_EOL);
+        echo $result . PHP_EOL;
     }
 }
-echo('</pre>');
+echo '</pre>';
