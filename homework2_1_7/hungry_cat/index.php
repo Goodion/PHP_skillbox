@@ -42,7 +42,7 @@ class HungryCat
             $this->result = "и замурчал 'мррррр' от своей любимой еды";
         }
 
-        echo('Голодный кот ' . $this->getName() . ', особые приметы: цвет - ' . $this->getColor() . ', съел ' . $food . ' ' . $this->result . '<br />');
+        echo 'Голодный кот ' . $this->getName() . ', особые приметы: цвет - ' . $this->getColor() . ', съел ' . $food . ' ' . $this->result . '<br />';
     }
 }
 

@@ -43,9 +43,9 @@ $sum = 0;
 
 for ($i = 0; $i <= rand(5, 20); $i++) {
     $currentToy = ToyFactory::createToy(generate_string($permitted_chars));
-    echo($currentToy->name . '-' . $currentToy->price . '<br />'); 
+    echo $currentToy->name . '-' . $currentToy->price . '<br />'; 
 
     $sum += $currentToy->price;
 }
 
-echo('Итого - ' . $sum);
+echo 'Итого - ' . $sum;

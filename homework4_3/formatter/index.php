@@ -19,7 +19,7 @@ class Display
         } else if ($formatter instanceof Formatter || method_exists($formatter, 'format')) {
             $formatter->format($string);
         } else {
-            echo($string);
+            echo $string;
         }
     }
 }
@@ -30,9 +30,9 @@ class Tag implements Renderable
     {
         $arr = explode('@@', $string);
         if (count($arr) === 2) {
-            echo('<' . $arr[0] . '>' . $arr[1] . '</' . $arr[0] . '>');
+            echo ('<' . $arr[0] . '>' . $arr[1] . '</' . $arr[0] . '>');
         } else {
-            echo($arr[0]);
+            echo $arr[0];
         }
         
     }
@@ -70,10 +70,10 @@ $arr = [
 ];
 
 foreach ($arr as $item) {
-    echo ('<br />');
+    echo '<br />';
     Display::show(new Tag, $item);
-    echo ('<br />');
+    echo '<br />';
     Display::show(new Str, $item);
-    echo ('<br />');
+    echo '<br />';
     Display::show(new Num, $item);
 }

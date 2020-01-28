@@ -50,7 +50,7 @@ class User
     protected function censor($age)
     {
         if ($this->age < 18) {
-            echo('Возраст пользователя должен быть больше 18 лет!<br />');
+            echo 'Возраст пользователя должен быть больше 18 лет!<br />';
         } else {
             return true;
         }
@@ -58,7 +58,7 @@ class User
 
     public function send($message, $connectionType)
     {
-        echo('Уведомление клиенту ' . $this->name . ', которому ' . $this->age . ' лет отправлено ' . $this->connectionType . ' : ' . $message . '<br />');
+        echo 'Уведомление клиенту ' . $this->name . ', которому ' . $this->age . ' лет отправлено ' . $this->connectionType . ' : ' . $message . '<br />';
     }
 }
 

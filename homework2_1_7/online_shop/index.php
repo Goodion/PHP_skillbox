@@ -57,7 +57,7 @@ class Basket
     public function describe()
     {
         foreach ($this->basket as $key) {
-            echo($key['name'] . ' - ' . $key['price'] . 'руб. - ' . $key['quantity'] . 'шт <br />'); 
+            echo $key['name'] . ' - ' . $key['price'] . 'руб. - ' . $key['quantity'] . 'шт <br />'; 
         }
     }
 }
@@ -97,11 +97,11 @@ $basket->addProduct($pr4, 1);
 
 $order = new Order($basket);
 
-echo('<pre>');
+echo '<pre>';
 print_r($order->getBasket());
-echo('</pre>');
-echo('Итого: ' . $order->getPrice());
-echo('<br />');
+echo '</pre>';
+echo 'Итого: ' . $order->getPrice();
+echo '<br />';
 
 $user = new \client_notice\User('Николай Николаич', 'niknik@mail.ru', 'male', '25');
 
