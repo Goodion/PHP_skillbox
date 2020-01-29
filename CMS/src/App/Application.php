@@ -29,7 +29,8 @@ class Application
             } else {
                 $errorCode = 500;
             }
-            echo 'Возникла ошибка: ' . $e->getMessage() . ' Код ошибки - ' . $errorCode;
+            $format = 'Возникла ошибка: %s Код ошибки - %d';
+            echo sprintf($format, $e->getMessage(), $errorCode);
         }
     }
 

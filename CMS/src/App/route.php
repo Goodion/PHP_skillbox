@@ -35,13 +35,39 @@ class Route
         return $this->path;
     }
 
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
     public function match($method, $uri) : bool
     {
         return ($this->path === $uri && $this->method === $method) ? true : false;
     }
 
+    private function findParams($path, $page)
+    {
+        $pathArr = explode('/', $path);
+        $pageArr = explode('/', $page);
+
+        for ($i = 0; $i < count($pageArr); $i++) {
+            if ($pageArr[$i] === '*') {
+                $result[] = $pathArr[$i];
+            }
+        }
+        return $result;
+    }
+
     public function run($uri)
     {
-        return $this->prepareCallback($this->callback)($uri);
+        if (strpos($this->path, '*')) {
+            $params = $this->findParams($uri, $this->path);
+        }
+
+        if (isset($params)) {
+            return call_user_func_array($this->prepareCallback($this->callback), $params);
+        } else {
+            return $this->prepareCallback($this->callback)($uri);
+        }
     }
 }

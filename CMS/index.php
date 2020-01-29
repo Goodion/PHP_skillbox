@@ -48,6 +48,10 @@ $router->get( '/test/*/test2/*', function ($param1, $param2) {
     return "Test page with param1=$param1 param2=$param2" ;
 });
 
+$router->get( '/posts/*/', function () {
+    return new View('new.posts', ['title' => 'posts Page']);
+});
+
 $application = new Application($router);
 
 $application->initialize();
