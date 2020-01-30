@@ -1,6 +1,6 @@
 <?php
 
-return $db = [
+return [
     'driver' => 'mysql',
     'host' => 'localhost',
     'username' => 'cmsadmin',

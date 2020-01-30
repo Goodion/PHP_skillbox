@@ -1,7 +1,8 @@
 <?php
 
 namespace src\App;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Capsule\Manager as Capsule,
+    \src\App\Config as Config;
 
 class Application
 {

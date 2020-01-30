@@ -1,13 +1,14 @@
 <?php
 
 use \src\App\Controller as Controller,
-    view\View as View,
-    \src\App\Application as Application;
+    \view\View as View,
+    \src\App\Application as Application,
+    \src\Model\Book as Book;
 
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-require_once 'bootstrap.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/bootstrap.php';
 require_once APP_DIR . '/view/View.php';
 
 $router = new \src\App\Router();
@@ -21,6 +22,7 @@ $router->get('/about', function() {
 }); 
 
 $router->get('/', Controller::class . '@index');
+
 $router->get('/about', Controller::class . '@about');
 
 $router->get('/', function() {
@@ -36,7 +38,7 @@ $router->post('/post', function() {
 });
 
 $router->get('/new', function() {
-    print_r(\src\Model\Book::all());
+    print_r(Book::all());
     return new View('new.new', ['title' => 'NEW Page']);
 });
 
